@@ -28,6 +28,13 @@
 					<script type="text/template">
 						Определение первообразной
 						-------------------------
+
+						Функция $f(x)$ называется первообразной для функции $f(x)$ на данном промежутке, если
+						для любого $x$ из данного промежутка $F'(x)=f(x)$
+
+
+						Интегрирование функции $f(x)$ - это математическая 
+						операция по нахождению первообразной $f(x)$
 					</script>
 				</section>
 				<section data-markdown>
@@ -44,13 +51,13 @@
 				</section>
 				<section id="integral-table">
 						<h2>Таблица интегралов</h2>
-						-------------------
+						
 
 				</section>
 				<section data-markdown>
 					<script type="text/template">
-						Определенный интеграл. Определение.
-						-----------------------------------
+						Определенный интеграл. Определение
+						----------------------------------
 					</script>
 				</section>
 				<section data-markdown>
@@ -115,11 +122,17 @@
 				</section>
 				<section data-markdown>
 					<script type="text/template">
-						Игра "Найди пару"
+						Игра "Найди котиков"
 						---------------------
 					</script>
 				</section>
-				<section>Слайд 2</section>
+				<section data-markdown>
+					<script type="text/template">
+						Игра "Найди интегралы"
+						---------------------
+					</script>
+				</section>
+				
 			</div>
 		</div>
 
@@ -135,6 +148,16 @@
 				hash: true,
 				center: false,
 				slideNumber: true,
+				math: {
+					notificationsEnabled: true,
+				},
+				dependencies: [
+					{
+						src: 'plugin/math-katex/math-katex.js',
+						async: true,
+						callback: () => {},
+					}
+				],
 
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
