@@ -131,14 +131,28 @@
 					</script>
 				</section>
 				<section data-markdown data-markdown-separator="^Notes:">
-					<script type="text/template">
-						Определенный интеграл. Определение
-						----------------------------------
-
-						Более компактное определение определённого интеграла записывается, как 
-						$$
-						J=\lim_{n \rightarrow \infty}
-						$$
+					<script type="script/template">
+					 Определенный Интеграл.Определение
+					 ---------------------
+					Если предeл $J$ существует , не зависит от способа дробления и выбора точек $\xi_k$
+					, то он называется определенный интеграл функции $f(x)$ по промежутку \[a,b\]
+					и Обозначается
+					$$
+					J=\int_a^b f(x)dx
+					$$ где $a$ и $b$ называются нижними и верхними пределами интегрирования.
+	
+					</script>
+				</section>
+	
+				<section data-markdown data-markdown-separator="^Notes:">
+					<script type="script/template">
+					 Определенный Интеграл.Определение
+					 ---------------------
+					Более компактное определение определенного интеграла  записывается , компактное
+					$$
+					J=\lim_{n \rightarrow \infty, \lambda \rightarrow 0}\sum_{k=0}^{n-1} f(\xi_k) \cdot \Delta x_k
+					$$
+	
 					</script>
 				</section>
 				<section data-markdown data-markdown-separator="^Notes:">
@@ -150,11 +164,22 @@
 						\int_a^b Af(x)dx = A\int_a^b f(x)dx
 						$$
 						- $$
-						\int_a^b (f_1(x) + f_2(x))dx
+						\int_a^b (f_1(x)+f_2(x))dx = $$ $$\int_a^b f_1(x)dx + \int_a^b f_2(x)dx
 						$$
-						- $$\int_a^b f_1(x)$$
 
 
+					</script>
+				</section>
+				<section data-markdown data-markdown-separator="^Notes:">
+					<script type="script/template">
+					 Определенный Интеграл.Свойства
+					 ---------------------
+					- $$
+					\int_a^b f(x)dx = \int_a^c f(x)dx + \int_c^b f(x)dx,
+					$$ для любых чисел $a < c < b$
+					
+					
+	
 					</script>
 				</section>
 				<section data-markdown data-markdown-separator="^Notes:">
