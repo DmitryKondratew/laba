@@ -6,8 +6,9 @@
 
 		<title>Интегральное исчисление</title>
 		<script src="C:\Users\stud\laba\reveal\sample\algebrite.bundle-for-browser.js"></script>
-		<script src="D:\4 курс\2020\math.js"></script>
 		<script src="C:\Users\stud\laba\reveal\sample\underscore-min.js"></script>
+		<script src="C:\Users\stud\laba\reveal\sample\plotly-latest.min.js"></script>
+		<script src="C:\Users\stud\laba\reveal\sample\math.js"></script>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
@@ -241,19 +242,20 @@
 						-----------------------------
 					</script>
 				</section>
-				<section id="evaluateIntegral" data-markdown data-markdown-separator="^Notes:">
-					<script type="text/template">
+				<section id="evaluateIntegral">
+						<h2>
 						Вычисление интеграла
-						--------------------
-						
+						</h2>
+						<input type="text" id="_a">
 						$$\int$$
 						<input type="text" id="_function">
-						<input type="text" id="_a">
+						
 						<input type="text" id="_b">
+						$d$ <input type="text" id="_d">
+						<input type="button" value="Считать" id="_getResult">
 
 						<output id="_result"></output>
 						
-					</script>
 				</section>
 				<section data-markdown data-markdown-separator="^Notes:">
 					<script type="text/template">
@@ -353,12 +355,15 @@
 						Нахожденеи площади криволинейной трапеции
 					</h2>
 					<label for="function">$f(x)$</label>
-					<input type="text" id="function">
-					<label for="_a">$a$</label>
-					<input type="text" id="_a">
-					<label for="_b">$a$</label>
-					<input type="text" id="_b">
+					<input type="text" id="func">
+					<label for="a">$a$</label>
+					<input type="text" id="a">
+					<label for="b">$b$</label>
+					<input type="text" id="b">
+					<input type="button" value="Посчитать площадь" id="getResult">
 					<output id="result"></output>
+					<div style="height: 400px" id="plot"></div>
+
 				</section>
 				<section data-markdown data-markdown-separator="^Notes:">
 					<script type="text/template">
@@ -372,8 +377,9 @@
 					</script>
 				</section>
 				<section>
-					Игра "Найди интегралы"
-						---------------------
+					<h2>
+						Игра "Найди котиков"
+					</h2>
 						<table id = "fidCats">
 							<tbody>
 								<tr>
@@ -417,6 +423,8 @@
 									<span>Игрок 2</span>
 									<span id="score21">0</span> очков
 								</td>
+							</tr>
+						</table>
 
 				</section>
 				<section data-markdown data-markdown-separator="^Notes:">
@@ -436,6 +444,98 @@
 		<script>
 			window.onload = () =>
 			{
+				document.querySelector('#_getResult').onclick = () => {
+				//Нахождение интеграла
+					let a = document.querySelector('#_a').value;
+					let b = document.querySelector('#_b').value;
+					let d = document.querySelector('#_d').value;
+					let func = document.querySelector('#_function').value;
+					let result = document.querySelector('#_result');
+					if (func === '') {
+						return result.innerHTML = "Вы не ввели функцию";
+					}
+					if (d === '') {
+						return result.innerHTML = "Вы не ввели переменную интегрирования";
+					}
+					if (a === '' && b !== '') {
+						return result.innerHTML = "Вы не ввели нижний предел интегрирования";
+					}
+					if (a !== '' && b === '') {
+						return result.innerHTML = "Вы не ввели верхний предел интегрирования";
+					}
+					if (a !== '' && b !== '') {
+						return result.innerHTML = Algebrite.defint(func, d, b, a);
+					}
+					return result.innerHTML = katex.renderToString(
+						Algebrite.simplify(
+							Algebrite.integral(func, d) + '+ C'
+						).toLatexString()
+					);
+				}
+
+				//Нахождение площади криволинейной трапеции
+				document.querySelector('#getResult').onclick = () => {
+					let a = document.querySelector('#a').value;
+					let b = document.querySelector('#b').value;
+					let func = document.querySelector('#func').value;
+					let result = document.querySelector('#result');
+					if (func === '') {
+						return result.innerHTML = "Вы не ввели функцию";
+					}
+					if (a === '' && b !== '') {
+						return result.innerHTML = "Вы не ввели левую границу";
+					}
+					if (a !== '' && b === '') {
+						return result.innerHTML = "Вы не ввели правую границу";
+					}
+					if (a > b) {
+						return result.innerHTML = "Вы перепутали границы";
+					}
+					if (a === b) {
+						return result.innerHTML = "0";
+					}
+					plot (
+						'plot',
+						document.querySelector('#func').value,
+						document.querySelector('#a').value,
+						document.querySelector('#b').value,
+					);
+					return result.innerHTML = Algebrite.defint(func, 'x', a, b)
+				}
+
+				const plot = (place, expr, a, b) => {
+					const exprCompile = math.compile(expr);
+					const aCompile = math.compile(a);
+					const bCompile = math.compile(b);
+					const xValue = math.range(+a, +b+.05, .05).toArray();
+					const yValue = xValue.map(
+						x => {
+							return exprCompile.evaluate({x});
+						}
+					);
+					const xValueA = [a,a];
+					const xValueB = [b,b];
+					const yValueA = [0,exprCompile.evaluate({x:a})];
+					const yValueB = [0,exprCompile.evaluate({x:b})];
+					const plot1 = {
+						x: xValue,
+						y: yValue,
+						fill: 'tozeroy',
+						type: 'scater',
+					}
+					const plot2 = {
+						x: xValueA,
+						y: yValueA,
+						type: 'line',
+					}
+					const plot3 = {
+						x: xValueB,
+						y: yValueB,
+						type: 'line',
+					}
+					Plotly.newPlot(place, [plot1, plot2, plot3]);
+				}
+
 				let integralList = [
 				'0',
 				'1',

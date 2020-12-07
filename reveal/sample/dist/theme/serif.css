@@ -86,7 +86,7 @@
   font-size: 2em; }
 
 .reveal h3 {
-  font-size: 1.55em; }
+  font-size: 1.5em; }
 
 .reveal h4 {
   font-size: 1em; }
@@ -283,33 +283,67 @@
 @media print {
   .backgrounds {
     background-color: #F0F1EB; } }
+  #_function{
+    position: absolute;
+    height: 20px;
+    top: 245px;
+    width: 400px;
+    left: 273px;
+  }
+  #_a {
+    position: absolute;
+    top: 133;
+    width: 50px;
+    left: 221px;
+    height: 50px;
+  }
 
-    #_function{
-      position: absolute;
-      top: 245px;
-      height: 20px;
-      width: 400px;
-      left: 273px;
-    }
+  #_b {
+    position: absolute;
+    top: 321px;
+    
+    width: 50px;
+    left: 175px;
+    height: 50px;;
+    
+  }
+  #_d {
+    position: absolute;
+    top: 232px;
+    
+    width: 50px;
+    left: 740px;
+    height: 50px;
+    font-size: 30px;
+    
+  }
 
-    #_a{
-      position: absolute;
-      top: 133;
-      height: 50px;
-      width: 50px;
-      left: 221px;
-    }
+  #evaluateIntegral .formula.display {
+    position: absolute;
+    left: 200px;
+    top: 200px;
 
-    #_b{
-      position: absolute;
-      top: 321px;
-      height: 50px;
-      width: 50px;
-      left: 175px;
-    }
+  }
+  #evaluateIntegral .formula.inline {
+    position: absolute;
+    left: 680px;
+    top: 230px;
 
-    #evaluateIntegral .formula{
-      position: absolute;
-      left: 200px;
-      top: 200px;
-    }
+  }
+
+  #_getResult {
+    position: absolute;
+    top: 321px;
+    width: 524px;
+    left: 273px;
+    height: 50px;
+    font-size: 30px;
+  }
+
+  #result{
+    top: 389px;
+    position: absolute;
+    margin-left: -50%;
+    text-align: center;
+    width: 100%;
+  }
